@@ -29,13 +29,13 @@ class DataTransformation:
         '''
         try:            
             numerical_features = [
-                        'Age', 'Annual Income', 'Number of Dependents', 'Health Score', 
-                        'Previous Claims', 'Credit Score', 'Insurance Duration','Year','Day'
+                        'Age', 'Annual_Income', 'Number_of_Dependents', 'Health_Score', 
+                        'Previous_Claims', 'Credit_Score', 'Insurance_Duration','Year','Day'
                                 ]
             categorical_features = [
-                        'Gender', 'Marital Status', 'Education Level', 'Occupation', 'Location',
-                        'Policy Type', 'Customer Feedback', 'Smoking Status', 'Exercise Frequency', 
-                        'Property Type', 'Month_name'
+                        'Gender', 'Marital_Status', 'Education_Level', 'Occupation', 'Location',
+                        'Policy_Type', 'Customer_Feedback', 'Smoking_Status', 'Exercise_Frequency', 
+                        'Property_Type', 'Month_name'
                                     ]
             target_column = 'Premium Amount'
 
@@ -81,14 +81,11 @@ class DataTransformation:
             logging.info("Read train and test data completed")
 
             logging.info("Obtaining preprocessing object")
+
             
             preprocessing_obj=self.get_data_transformer_object()
 
             target_column ='Premium Amount'
-            numerical_features =[
-                        'Age', 'Annual Income', 'Number of Dependents', 'Health Score', 
-                        'Previous Claims', 'Credit Score', 'Insurance Duration','Year','Day'
-                                ]
 
             input_feature_train_df=train_df.drop(columns=[target_column],axis=1)
             target_feature_train_df=train_df[target_column]

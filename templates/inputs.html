@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insurance Price Prediction</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Insurance Price Prediction</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <h1>
+                <legend>Enter Customer Details</legend>
+            </h1>
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input class="form-control" type="number" name="Age" placeholder="Enter your Age" min="1" max="100" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="Gender" placeholder="Enter your Gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Annual_Income</label>
+                <input class="form-control" type="number" name="Annual_Income" placeholder="Enter your Annual Income" min="2" max="20000000" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Marital_Status</label>
+                <select class="form-control" name="Marital_Status" placeholder="Enter you Marital Status" required>
+                    <option class="placeholder" selected disabled value="">Select Marital Status</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Single">Single</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number_of_Dependents</label>
+                <input class="form-control" type="number" name="Number_of_Dependents" placeholder="Enter Number of Dependents" min="0" max="10" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Education_Level</label>
+                <select class="form-control" name="Education_Level" placeholder="Enter you Education Level" required>
+                    <option class="placeholder" selected disabled value="">Select Education Level</option>
+                    <option value="Master's">Master's</option>
+                    <option value="Bachelor's">Bachelor's</option>
+                    <option value="High School">High School</option>
+                    <option value="PhD">PhD</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Occupation</label>
+                <select class="form-control" name="Occupation" placeholder="Enter you Occupation" required>
+                    <option class="placeholder" selected disabled value="">Select Occupation</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Health_Score</label>
+                <input class="form-control" type="number" name="Health_Score" placeholder="Enter your Health Score" min="1" max="100" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <select class="form-control" name="Location" placeholder="Enter you Location" required>
+                    <option class="placeholder" selected disabled value="">Select Location</option>
+                    <option value="Suburban">Suburban</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Rural">Rural</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Policy_Type</label>
+                <select class="form-control" name="Policy_Type" placeholder="Enter you Policy Type" required>
+                    <option class="placeholder" selected disabled value="">Select Policy Type</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Comprehensive">Comprehensive</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Previous_Claims</label>
+                <input class="form-control" type="number" name="Previous_Claims" placeholder="Enter Previous Claims" min="0" max="10" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Credit_Score</label>
+                <input class="form-control" type="number" name="Credit_Score" placeholder="Enter your Credit Score" min="0" max="10000" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Insurance_Duration</label>
+                <input class="form-control" type="number" name="Insurance_Duration" placeholder="Enter Insurance Duration" min="1" max="10" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Customer_Feedback</label>
+                <select class="form-control" name="Customer_Feedback" placeholder="Enter you Customer Feedback" required>
+                    <option class="placeholder" selected disabled value="">Select Customer Feedback</option>
+                    <option value="Average">Average</option>
+                    <option value="Poor">Poor</option>
+                    <option value="Good">Good</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Smoking_Status</label>
+                <select class="form-control" name="Smoking_Status" placeholder="Enter you Smoking Status" required>
+                    <option class="placeholder" selected disabled value="">Select Smoking Status</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Exercise_Frequency</label>
+                <select class="form-control" name="Exercise_Frequency" placeholder="Enter you Exercise Frequency" required>
+                    <option class="placeholder" selected disabled value="">Select Exercise Frequency</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Property_Type</label>
+                <select class="form-control" name="Property_Type" placeholder="Enter you Property Type" required>
+                    <option class="placeholder" selected disabled value="">Select Property Type</option>
+                    <option value="Condo">Condo</option>
+                    <option value="Apartment">Apartment</option>
+          <option value="House">House</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input class="form-control" type="number" name="year" placeholder="Enter Year" min="2000" max="2024" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Day</label>
+        <input class="form-control" type="number" name="day" placeholder="Enter Day" min="1" max="31" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Month_Name</label>
+        <select class="form-control" name="month_name" placeholder="Enter you Month Name" required>
+          <option class="placeholder" selected disabled value="">Select Month Name</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <input class="btn btn-primary" type="submit" value="Predict your Premium Amount" required />
+      </div>
+    </form>
+    <h2>
+      THE prediction is {{results}}
+    </h2>
+  </body>
+</html>
